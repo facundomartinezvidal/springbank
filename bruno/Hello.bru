@@ -1,0 +1,25 @@
+meta {
+  name: Hello
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/client/1
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("responde 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+  
+  test("devuelve Hello World", function() {
+    expect(res.getBody()).to.equal("Hello World");
+  });
+}

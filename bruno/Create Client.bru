@@ -1,0 +1,32 @@
+meta {
+  name: Create Client
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/client
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "firstName": "Facundo",
+    "lastName": "Martinez",
+    "email": "facu@test.com",
+    "phone": 1122334455,
+    "password": "secret123"
+  }
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("crea el cliente y devuelve id", function() {
+    expect(res.getStatus()).to.equal(200);
+    expect(res.getBody().id).to.be.a("number");
+  });
+}
