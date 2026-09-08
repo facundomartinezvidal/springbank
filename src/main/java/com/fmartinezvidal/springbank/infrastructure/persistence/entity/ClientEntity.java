@@ -1,15 +1,15 @@
-package com.fmartinezvidal.springbank.model;
-
+package com.fmartinezvidal.springbank.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
+@Table(name = "client")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Client {
+public class ClientEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,5 +24,4 @@ public class Client {
     private int phone;
     @Column(nullable = false, length = 20)
     private String password;
-
 }
