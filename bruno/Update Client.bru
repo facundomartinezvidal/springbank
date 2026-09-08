@@ -1,0 +1,32 @@
+meta {
+  name: Update Client
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{baseUrl}}/client/:id
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 2
+}
+
+body:json {
+  {
+    "id": 3,
+    "firstName": "Pedro",
+    "lastName": "Sanchez",
+    "email": "pepito@test.com",
+    "phone": 12345612,
+    "password": "kakon@2026"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+  forwardAuthorizationHeader: false
+}
