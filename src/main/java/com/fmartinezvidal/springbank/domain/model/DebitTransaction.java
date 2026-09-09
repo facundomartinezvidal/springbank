@@ -1,15 +1,33 @@
 package com.fmartinezvidal.springbank.domain.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class DebitTransaction extends Transaction {
+public final class DebitTransaction extends Transaction {
 
-    private Account account;
+    private final Long accountId;
+
+    private DebitTransaction(Long id, String description, BigDecimal amount, LocalDateTime date, Long accountId) {
+        super(id, description, amount, date, TransactionType.DEBIT);
+        this.accountId = accountId;
+    }
+
+    public static DebitTransaction create(String description, BigDecimal amount, LocalDateTime date, Long accountId) {
+        requireDescription(description);
+        requireAmount(amount);
+        requireDate(date);
+        if (accountId == null) {
+            throw new IllegalArgumentException("accountId es obligatorio");
+        }
+        return new DebitTransaction(null, description, amount, date, accountId);
+    }
+
+    public static DebitTransaction reconstitute(Long id, String description, BigDecimal amount,
+                                                 LocalDateTime date, Long accountId) {
+        return new DebitTransaction(id, description, amount, date, accountId);
+    }
+
+    public Long getAccountId() {
+        return accountId;
+    }
 }
